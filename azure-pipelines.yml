@@ -42,7 +42,6 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      commandOptions: '-out=tfplan'
       environmentServiceNameAzureRM: '$(azureServiceConnection)'
   
   - task: TerraformTaskV3@3
