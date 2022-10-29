@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  azureServiceConnection: 'dami-service-connection'
+  azureServiceConnection: 'dami-connection'
   azureResourceGroup: bicep
   subscriptionId: '85c7908d-8028-4894-af5d-1991ee8f0450'
   key: 'terraform.tfstate'
@@ -24,7 +24,7 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'init'
-      backendServiceArm: '${subscriptionId}'
+      backendServiceArm: '${azureServiceConnection}'
       backendAzureRmResourceGroupName: '${azureResourceGroup}'
       backendAzureRmStorageAccountName: '${damiteststorage}'
       backendAzureRmContainerName: '${container}'
@@ -38,5 +38,12 @@ jobs:
       provider: 'azurerm'
       command: 'plan'
       commandOptions: '-out=tfplan'
-      environmentServiceNameAzureRM: 'Visual Studio Enterprise(85c7908d-8028-4894-af5d-1991ee8f0450)'
+      environmentServiceNameAzureRM: '${azureServiceConnection}'
+  
+  - task: TerraformTaskV3@3
+    displayName: Apply
+    inputs:
+      provider: 'azurerm'
+      command: 'apply'
+      environmentServiceNameAzureRM: '${azureServiceConnection}'
 
