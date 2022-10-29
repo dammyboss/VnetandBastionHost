@@ -33,6 +33,14 @@ jobs:
       backendAzureRmStorageAccountName: '$(damiteststorage)'
       backendAzureRmContainerName: '$(container)'
       backendAzureRmKey: '$(key)'
+
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # to resolve the lock file issue in pipeline
+        
+        terraform init --upgrade
     
 - job: TerraformApply
   dependsOn: TerraformInit
