@@ -28,11 +28,11 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'init'
-      backendServiceArm: '${azureServiceConnection}'
-      backendAzureRmResourceGroupName: '${azureResourceGroup}'
-      backendAzureRmStorageAccountName: '${damiteststorage}'
-      backendAzureRmContainerName: '${container}'
-      backendAzureRmKey: '${key}'
+      backendServiceArm: '$(azureServiceConnection)'
+      backendAzureRmResourceGroupName: '$(azureResourceGroup)'
+      backendAzureRmStorageAccountName: '$(damiteststorage)'
+      backendAzureRmContainerName: '$(container)'
+      backendAzureRmKey: '$(key)'
     
 - job: TerraformApply
   steps:
@@ -42,12 +42,12 @@ jobs:
       provider: 'azurerm'
       command: 'plan'
       commandOptions: '-out=tfplan'
-      environmentServiceNameAzureRM: '${azureServiceConnection}'
+      environmentServiceNameAzureRM: '$(azureServiceConnection)'
   
   - task: TerraformTaskV3@3
     displayName: Apply
     inputs:
       provider: 'azurerm'
       command: 'apply'
-      environmentServiceNameAzureRM: '${azureServiceConnection}'
+      environmentServiceNameAzureRM: '$(azureServiceConnection)'
 
