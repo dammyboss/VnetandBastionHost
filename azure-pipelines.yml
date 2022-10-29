@@ -55,10 +55,16 @@ jobs:
       command: 'plan'
       environmentServiceNameAzureRM: '$(azureServiceConnection)'
   
+  # - task: TerraformTaskV3@3
+  #   displayName: Apply
+  #   inputs:
+  #     provider: 'azurerm'
+  #     command: 'apply'
+  #     environmentServiceNameAzureRM: '$(azureServiceConnection)'
+  
   - task: TerraformTaskV3@3
     displayName: Apply
     inputs:
       provider: 'azurerm'
       command: 'apply'
-      environmentServiceNameAzureRM: '$(azureServiceConnection)'
-
+      environmentServiceNameAzureRM: 'Visual Studio Enterprise(1)(85c7908d-8028-4894-af5d-1991ee8f0450)'
