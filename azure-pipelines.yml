@@ -36,7 +36,7 @@ jobs:
 
     
 - job: TerraformApply
-  dependsOn: TerraformPlan
+  dependsOn: TerraformInit
   steps:
   - task: TerraformTaskV3@3
     displayName: Terraform Init
